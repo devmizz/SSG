@@ -1,5 +1,5 @@
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class App {
     public void run() throws Exception {
 
-        HashMap<Integer, Phrase> phrases = new HashMap<>();
+//        HashMap<Integer, Phrase> phrases = new HashMap<>();
+        ArrayList<Phrase> phrases = new ArrayList<>();
         String cmd;
         String phrase, writer;
         int number = 1;
@@ -26,9 +27,9 @@ public class App {
                 case "종료" :
                     PrintWriter pw = new PrintWriter("/Users/chanki/Desktop/programming/likelion/ssg/out.txt");
 
-                    for(Integer key: phrases.keySet()) {
-                        System.out.println(phrases.get(key).toString());
-                        pw.println(phrases.get(key).toString());
+                    for(int i = 0; i < phrases.size(); i++) {
+                        System.out.println(phrases.get(i).toString());
+                        pw.println(phrases.get(i).toString());
                     }
 
                     break outer;
@@ -38,33 +39,36 @@ public class App {
                     sc.nextLine();
                     System.out.print("작가: ");
                     writer = sc.next().trim();
-                    phrases.put(number, new Phrase(number, writer, phrase));
+                    phrases.add(new Phrase(number, writer, phrase));
                     System.out.println(phrases.size() + "번 명언이 등록되었습니다.");
                     number++;
                     break;
                 case "목록" :
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("---------------");
-                    ArrayList<Integer> keys = new ArrayList<>(phrases.keySet());
-                    int index;
-                    for(int i = keys.size() - 1; i >= 0; i--) {
-                        index = keys.get(i);
-                        System.out.println(index + " / " + phrases.get(index).getWriter() + " / " + phrases.get(index).getContent());
+                    for(int i = phrases.size() - 1; i >= 0; i--) {
+                        Phrase findPhrase = phrases.get(i);
+                        System.out.println(findPhrase.getNumber() + " / " + findPhrase.getWriter() + " / " + findPhrase.getContent());
                     }
                     break;
                 case "삭제" :
                     System.out.print("id=");
-                    phrases.remove(Integer.parseInt(sc.next()));
+                    int delNumber = sc.nextInt();
+                    for(int i = 0; i < phrases.size(); i++) {
+                        if(delNumber == phrases.get(i).getNumber()) {
+                            phrases.remove(i);
+                        }
+                    }
                     break;
                 case "수정" :
                     System.out.print("id=");
-                    updateId = sc.nextInt();
+                    updateId = sc.nextInt() - 1;
                     Phrase updatePrase = phrases.get(updateId);
                     System.out.println(updateId + "번 명언을 수정합니다.");
                     System.out.println("기존 명언 : " + updatePrase.getContent());
                     System.out.print("새 명언 : ");
                     updatePrase.setContent(sc.next().trim());
-                    phrases.put(updateId, updatePrase);
+                    phrases.set(updateId, updatePrase);
                     break;
             }
         }
@@ -81,6 +85,10 @@ class Phrase {
         this.number = number;
         this.writer = writer;
         this.content = content;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public String getWriter() {
