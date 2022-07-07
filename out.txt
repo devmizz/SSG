@@ -1,2 +1,2 @@
-Phrase{number=3, writer='빠빠', content='쀼쀼'}
-Phrase{number=4, writer='큐큐', content='킁킁'}
+3
+Phrase{number=3, writer='카', content='호'}
