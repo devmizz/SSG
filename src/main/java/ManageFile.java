@@ -14,18 +14,17 @@ public class ManageFile {
 
         if(fileSc.hasNext()) {
 
-            int phraseId = Integer.parseInt(fileSc.nextLine());
+            String parse = fileSc.nextLine();
+
+            int phraseId = parsePhraseId(parse);
+
+            String[] phrasesRaw = parse.substring(parse.indexOf('[') + 1, parse.indexOf(']')).split(", P");
+
             ArrayList<Phrase> phrases = new ArrayList<>();
 
-            while (fileSc.hasNextLine()) {
-
-                String input = fileSc.nextLine();
-                String[] splitInput;
-                int start = input.indexOf('{');
-
-                splitInput = input.substring(start + 1, input.length() - 1).split(" ");
-
-                phrases.add(parsePhrase(splitInput));
+            for(String phrase: phrasesRaw) {
+                String[] source = phrase.substring(phrase.indexOf('{') + 1, phrase.indexOf('}')).split(", ");
+                phrases.add(parsePhrase(source));
             }
 
             return new FileDTO(phraseId, phrases);
@@ -34,16 +33,24 @@ public class ManageFile {
         }
     }
 
-    Phrase parsePhrase(String[] splitInput) {
+    Phrase parsePhrase(String[] source) {
         int phraseId = 0;
         String writer;
         String phrase;
 
-        phraseId = Integer.parseInt(splitInput[0].substring(splitInput[0].indexOf('=') + 1, splitInput[0].length() - 1));
-        writer = splitInput[1].substring(splitInput[1].indexOf('\'') + 1, splitInput[1].length() - 2);
-        phrase = splitInput[2].substring(splitInput[2].indexOf('\'') + 1, splitInput[2].length() - 1);
+        phraseId = Integer.parseInt(source[0].substring(source[0].indexOf('=') + 1));
+        writer = source[1].substring(source[1].indexOf('\'') + 1, source[1].length() - 1);
+        phrase = source[2].substring(source[2].indexOf('\'') + 1, source[2].length() - 1);
 
         return new Phrase(phraseId, writer, phrase);
+    }
+
+    int parsePhraseId(String parse) {
+        int start, end;
+        start = parse.indexOf("phraseId=") + "phraseId=".length();
+        end = parse.indexOf(',');
+
+        return Integer.parseInt(parse.substring(start, end));
     }
 
     void saveFile(FileDTO file) {
@@ -55,11 +62,7 @@ public class ManageFile {
         }
 
         System.out.println(file.toString());
-
-        pw.println(file.getPhraseId()- 1);
-        for (Phrase phrase : file.getPhrases()) {
-            pw.println(phrase.toString());
-        }
+        pw.println(file);
 
         pw.flush();
         pw.close();
