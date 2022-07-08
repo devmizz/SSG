@@ -61,7 +61,6 @@ public class ManageFile {
             e.printStackTrace();
         }
 
-        System.out.println(file.toString());
         pw.println(file);
 
         pw.flush();
