@@ -46,16 +46,18 @@ public class ManageFile {
         return new Phrase(phraseId, writer, phrase);
     }
 
-    void saveFile(int phraseId, ArrayList<Phrase> phrases) {
+    void saveFile(FileDTO file) {
         PrintWriter pw = null;
         try {
-            pw = new PrintWriter("/Users/chanki/Desktop/programming/likelion/ssg/out.txt");
+            pw = new PrintWriter(filepath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        pw.println(phraseId - 1);
-        for (Phrase phrase : phrases) {
+        System.out.println(file.toString());
+
+        pw.println(file.getPhraseId()- 1);
+        for (Phrase phrase : file.getPhrases()) {
             pw.println(phrase.toString());
         }
 

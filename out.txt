@@ -1,2 +1,3 @@
-3
+4
 Phrase{number=3, writer='카', content='호'}
+Phrase{number=4, writer='히', content='하'}

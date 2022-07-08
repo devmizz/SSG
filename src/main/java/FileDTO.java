@@ -17,4 +17,12 @@ public class FileDTO {
     public ArrayList<Phrase> getPhrases() {
         return phrases;
     }
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "phraseId=" + phraseId +
+                ", phrases=" + phrases +
+                '}';
+    }
 }

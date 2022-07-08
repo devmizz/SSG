@@ -30,7 +30,7 @@ public class App {
 
             switch (cmd) {
                 case "종료":
-                    manageFile.saveFile(phraseId, phrases);
+                    manageFile.saveFile(new FileDTO(phraseId, phrases));
                     break outer;
 
                 case "등록":
