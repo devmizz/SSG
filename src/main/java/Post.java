@@ -5,7 +5,7 @@ public class Post {
 
     Scanner sc = new Scanner(System.in);
 
-    Phrase enroll(int phraseId) {
+    Saying add(int id) {
         String phrase;
         String writer;
 
@@ -15,27 +15,27 @@ public class Post {
         System.out.print("작가: ");
         writer = sc.next().trim();
 
-        System.out.println(phraseId + "번 명언이 등록되었습니다.");
+        System.out.println(id + "번 명언이 등록되었습니다.");
 
-        return new Phrase(phraseId, writer, phrase);
+        return new Saying(id, writer, phrase);
     }
 
-    void show(ArrayList<Phrase> phrases) {
+    void show(ArrayList<Saying> sayings) {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("---------------");
-        for (int i = phrases.size() - 1; i >= 0; i--) {
-            Phrase findPhrase = phrases.get(i);
-            System.out.println(findPhrase.getNumber() + " / " + findPhrase.getWriter() + " / " + findPhrase.getContent());
+        for (int i = sayings.size() - 1; i >= 0; i--) {
+            Saying findSaying = sayings.get(i);
+            System.out.println(findSaying.getNumber() + " / " + findSaying.getAuthor() + " / " + findSaying.getContent());
         }
     }
 
-    ArrayList<Phrase> delete(ArrayList<Phrase> phrases) {
+    ArrayList<Saying> delete(ArrayList<Saying> sayings) {
         boolean isDeleted = false;
         System.out.print("id=");
         int delNumber = sc.nextInt();
-        for (int i = 0; i < phrases.size(); i++) {
-            if (delNumber == phrases.get(i).getNumber()) {
-                phrases.remove(i);
+        for (int i = 0; i < sayings.size(); i++) {
+            if (delNumber == sayings.get(i).getNumber()) {
+                sayings.remove(i);
                 isDeleted = true;
                 break;
             }
@@ -43,20 +43,20 @@ public class Post {
         if(! isDeleted)
             System.out.println(delNumber + "번 명언은 존재하지 않습니다.");
 
-        return phrases;
+        return sayings;
     }
 
-    ArrayList<Phrase> update(ArrayList<Phrase> phrases) {
-        Phrase updatePrase = null;
+    ArrayList<Saying> update(ArrayList<Saying> sayings) {
+        Saying updatePrase = null;
         int updateId;
         int index = 0;
 
         System.out.print("id=");
         updateId = sc.nextInt();
 
-        for(int i = 0; i < phrases.size(); i++) {
-            if(updateId == phrases.get(i).getNumber()) {
-                updatePrase = phrases.get(i);
+        for(int i = 0; i < sayings.size(); i++) {
+            if(updateId == sayings.get(i).getNumber()) {
+                updatePrase = sayings.get(i);
                 index = i;
                 break;
             }
@@ -64,16 +64,16 @@ public class Post {
 
         if(updatePrase == null) {
             System.out.println(updateId + "번 명언은 존재하지 않습니다.");
-            return phrases;
+            return sayings;
         }
 
         System.out.println(updateId + "번 명언을 수정합니다.");
         System.out.println("기존 명언 : " + updatePrase.getContent());
         System.out.print("새 명언 : ");
         updatePrase.setContent(sc.next().trim());
-        phrases.set(index, updatePrase);
+        sayings.set(index, updatePrase);
 
-        return phrases;
+        return sayings;
     }
 
 

@@ -1,11 +1,11 @@
-class Phrase {
+class Saying {
     private int number;
-    private String writer;
+    private String author;
     private String content;
 
-    public Phrase(int number, String writer, String content) {
+    public Saying(int number, String author, String content) {
         this.number = number;
-        this.writer = writer;
+        this.author = author;
         this.content = content;
     }
 
@@ -13,8 +13,8 @@ class Phrase {
         return number;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getAuthor() {
+        return author;
     }
 
     public String getContent() {
@@ -29,7 +29,7 @@ class Phrase {
     public String toString() {
         return "Phrase{" +
                 "number=" + number +
-                ", writer='" + writer + '\'' +
+                ", writer='" + author + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }
