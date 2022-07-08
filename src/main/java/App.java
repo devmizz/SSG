@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class App {
     public void run() throws Exception {
 
-        ArrayList<Phrase> phrases;
+        ArrayList<Saying> sayings;
         String cmd;
-        int phraseId;
+        int id;
 
         System.out.println("== 명언 SSG ==");
 
@@ -16,10 +16,10 @@ public class App {
 
         FileDTO file = manageFile.getFile();
 
-        phrases = file.getPhrases();
-        phraseId = file.getPhraseId();
+        sayings = file.getSayings();
+        id = file.getId();
 
-        phraseId++;
+        id++;
 
         Post post = new Post();
 
@@ -30,24 +30,24 @@ public class App {
 
             switch (cmd) {
                 case "종료":
-                    manageFile.saveFile(new FileDTO(phraseId, phrases));
+                    manageFile.saveFile(new FileDTO(id, sayings));
                     break outer;
 
                 case "등록":
-                    phrases.add(post.enroll(phraseId));
-                    phraseId++;
+                    sayings.add(post.add(id));
+                    id++;
                     break;
 
                 case "목록":
-                    post.show(phrases);
+                    post.show(sayings);
                     break;
 
                 case "삭제":
-                    phrases = post.delete(phrases);
+                    sayings = post.delete(sayings);
                     break;
 
                 case "수정":
-                    phrases = post.update(phrases);
+                    sayings = post.update(sayings);
                     break;
             }
         }

@@ -14,53 +14,50 @@ public class ManageFile {
 
         if(fileSc.hasNext()) {
 
-            int phraseId = Integer.parseInt(fileSc.nextLine());
-            ArrayList<Phrase> phrases = new ArrayList<>();
+            String fileContent = fileSc.nextLine();
 
-            while (fileSc.hasNextLine()) {
+            int id = parsePhraseId(fileContent);
 
-                String input = fileSc.nextLine();
-                String[] splitInput;
-                int start = input.indexOf('{');
+            String[] sayings = fileContent.substring(fileContent.indexOf('[') + 1, fileContent.indexOf(']')).split(", P");
 
-                splitInput = input.substring(start + 1, input.length() - 1).split(" ");
+            ArrayList<Saying> result = new ArrayList<>();
 
-                phrases.add(parsePhrase(splitInput));
+            for(String saying: sayings) {
+                String[] source = saying.substring(saying.indexOf('{') + 1, saying.indexOf('}')).split(", ");
+                result.add(parsePhrase(source));
             }
 
-            return new FileDTO(phraseId, phrases);
+            return new FileDTO(id, result);
         } else {
             return null;
         }
     }
 
-    Phrase parsePhrase(String[] splitInput) {
-        int phraseId = 0;
-        String writer;
-        String phrase;
+    Saying parsePhrase(String[] source) {
+        int phraseId = Integer.parseInt(source[0].substring(source[0].indexOf('=') + 1));
+        String writer = source[1].substring(source[1].indexOf('\'') + 1, source[1].length() - 1);
+        String phrase = source[2].substring(source[2].indexOf('\'') + 1, source[2].length() - 1);
 
-        phraseId = Integer.parseInt(splitInput[0].substring(splitInput[0].indexOf('=') + 1, splitInput[0].length() - 1));
-        writer = splitInput[1].substring(splitInput[1].indexOf('\'') + 1, splitInput[1].length() - 2);
-        phrase = splitInput[2].substring(splitInput[2].indexOf('\'') + 1, splitInput[2].length() - 1);
+        return new Saying(phraseId, writer, phrase);
+    }
 
-        return new Phrase(phraseId, writer, phrase);
+    int parsePhraseId(String parse) {
+        int start = parse.indexOf("phraseId=") + "phraseId=".length();
+        int end = parse.indexOf(',');
+
+        return Integer.parseInt(parse.substring(start, end));
     }
 
     void saveFile(FileDTO file) {
         PrintWriter pw = null;
+
         try {
             pw = new PrintWriter(filepath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        System.out.println(file.toString());
-
-        pw.println(file.getPhraseId()- 1);
-        for (Phrase phrase : file.getPhrases()) {
-            pw.println(phrase.toString());
-        }
-
+        pw.println(file);
         pw.flush();
         pw.close();
     }

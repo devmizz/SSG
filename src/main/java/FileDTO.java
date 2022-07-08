@@ -2,27 +2,27 @@ import java.util.ArrayList;
 
 public class FileDTO {
 
-    private int phraseId;
-    private ArrayList<Phrase> phrases;
+    private int id;
+    private ArrayList<Saying> sayings;
 
-    public FileDTO(int phraseId, ArrayList<Phrase> phrases) {
-        this.phraseId = phraseId;
-        this.phrases = phrases;
+    public FileDTO(int id, ArrayList<Saying> sayings) {
+        this.id = id;
+        this.sayings = sayings;
     }
 
-    public int getPhraseId() {
-        return phraseId;
+    public int getId() {
+        return id;
     }
 
-    public ArrayList<Phrase> getPhrases() {
-        return phrases;
+    public ArrayList<Saying> getSayings() {
+        return sayings;
     }
 
     @Override
     public String toString() {
         return "File{" +
-                "phraseId=" + phraseId +
-                ", phrases=" + phrases +
+                "phraseId=" + id +
+                ", phrases=" + sayings +
                 '}';
     }
 }
