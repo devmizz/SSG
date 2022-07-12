@@ -17,7 +17,11 @@ public class App {
         FileDTO file = manageFile.getFile();
 
         sayings = file.getSayings();
+<<<<<<< HEAD
         id = file.getId();
+=======
+        phraseId = file.getId();
+>>>>>>> 6163a56 (for pull)
 
         id++;
 
@@ -30,12 +34,25 @@ public class App {
 
             switch (cmd) {
                 case "종료":
+<<<<<<< HEAD
                     manageFile.saveFile(new FileDTO(id, sayings));
+=======
+                    manageFile.saveFile(new FileDTO(phraseId, sayings));
+>>>>>>> 6163a56 (for pull)
                     break outer;
 
+                case "빌드":
+                    manageFile.saveFile(new FileDTO(phraseId, sayings));
+                    break;
+
                 case "등록":
+<<<<<<< HEAD
                     sayings.add(post.add(id));
                     id++;
+=======
+                    sayings.add(post.enroll(phraseId));
+                    phraseId++;
+>>>>>>> 6163a56 (for pull)
                     break;
 
                 case "목록":

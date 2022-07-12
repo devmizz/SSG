@@ -10,10 +10,21 @@ public class FileDTO {
         this.sayings = sayings;
     }
 
+<<<<<<< HEAD
     public int getId() {
         return id;
     }
 
+=======
+    public FileDTO() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+>>>>>>> 6163a56 (for pull)
     public ArrayList<Saying> getSayings() {
         return sayings;
     }

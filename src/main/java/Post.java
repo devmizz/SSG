@@ -5,18 +5,24 @@ public class Post {
 
     Scanner sc = new Scanner(System.in);
 
+<<<<<<< HEAD
     Saying add(int id) {
         String phrase;
+=======
+    Saying enroll(int phraseId) {
+        String saying;
+>>>>>>> 6163a56 (for pull)
         String writer;
 
         System.out.print("명언: ");
-        phrase = sc.next().trim();
+        saying = sc.next().trim();
         sc.nextLine();
         System.out.print("작가: ");
         writer = sc.next().trim();
 
         System.out.println(id + "번 명언이 등록되었습니다.");
 
+<<<<<<< HEAD
         return new Saying(id, writer, phrase);
     }
 
@@ -26,6 +32,21 @@ public class Post {
         for (int i = sayings.size() - 1; i >= 0; i--) {
             Saying findSaying = sayings.get(i);
             System.out.println(findSaying.getNumber() + " / " + findSaying.getAuthor() + " / " + findSaying.getContent());
+=======
+        return new Saying(phraseId, writer, saying);
+    }
+
+    void show(ArrayList<Saying> sayings) {
+        if(sayings != null) {
+            System.out.println("번호 / 작가 / 명언");
+            System.out.println("---------------");
+            for (int i = sayings.size() - 1; i >= 0; i--) {
+                Saying findSaying = sayings.get(i);
+                System.out.println(findSaying.getId() + " / " + findSaying.getAuthor() + " / " + findSaying.getContent());
+            }
+        } else {
+            System.out.println("현재 명언이 없습니다.");
+>>>>>>> 6163a56 (for pull)
         }
     }
 
@@ -34,7 +55,11 @@ public class Post {
         System.out.print("id=");
         int delNumber = sc.nextInt();
         for (int i = 0; i < sayings.size(); i++) {
+<<<<<<< HEAD
             if (delNumber == sayings.get(i).getNumber()) {
+=======
+            if (delNumber == sayings.get(i).getId()) {
+>>>>>>> 6163a56 (for pull)
                 sayings.remove(i);
                 isDeleted = true;
                 break;
@@ -55,7 +80,11 @@ public class Post {
         updateId = sc.nextInt();
 
         for(int i = 0; i < sayings.size(); i++) {
+<<<<<<< HEAD
             if(updateId == sayings.get(i).getNumber()) {
+=======
+            if(updateId == sayings.get(i).getId()) {
+>>>>>>> 6163a56 (for pull)
                 updatePrase = sayings.get(i);
                 index = i;
                 break;

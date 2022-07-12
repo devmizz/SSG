@@ -6,14 +6,15 @@ import java.util.Scanner;
 
 public class ManageFile {
 
-    private String filepath = "/Users/chanki/Desktop/programming/likelion/ssg/out.txt";
+    private String filepath = "/Users/chanki/Desktop/programming/likelion/ssg/data.json";
 
     FileDTO getFile() throws FileNotFoundException {
 
         Scanner fileSc = new Scanner(new File(filepath));
 
-        if(fileSc.hasNext()) {
+        FileDTO fileDTO = new FileDTO();
 
+        if(fileSc.hasNext()) {
             String fileContent = fileSc.nextLine();
 
             int id = parsePhraseId(fileContent);
@@ -29,7 +30,7 @@ public class ManageFile {
 
             return new FileDTO(id, result);
         } else {
-            return null;
+            return new FileDTO(0, new ArrayList<>());
         }
     }
 
