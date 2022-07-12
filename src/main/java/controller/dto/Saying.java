@@ -30,9 +30,9 @@ public class Saying {
     @Override
     public String toString() {
         return "{" +
-                "\"id\"=" + id +
-                ", \"author\"=\"" + author + '\"' +
-                ", \"content\"=\"" + content + '\"' +
+                "\"id\":" + id +
+                ", \"author\":\"" + author + '\"' +
+                ", \"content\":\"" + content + '\"' +
                 '}';
     }
 }

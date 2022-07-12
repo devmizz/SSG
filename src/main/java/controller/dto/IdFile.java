@@ -15,7 +15,7 @@ public class IdFile {
     @Override
     public String toString() {
         return "{" +
-                "id=" + id +
+                "id:" + id +
                 '}';
     }
 }
