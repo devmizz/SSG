@@ -30,7 +30,7 @@ public class Saying {
     @Override
     public String toString() {
         return "{" +
-                "number=" + id +
+                "id=" + id +
                 ", author='" + author + '\'' +
                 ", content='" + content + '\'' +
                 '}';
