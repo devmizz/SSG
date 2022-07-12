@@ -1,6 +1,8 @@
 package domain;
 
+import controller.dto.DataFile;
 import controller.dto.File;
+import controller.dto.IdFile;
 import controller.dto.Saying;
 
 import java.io.FileNotFoundException;
@@ -10,11 +12,21 @@ import java.util.Scanner;
 
 public class FileRepository {
 
-    private String filepath = "/Users/chanki/Desktop/programming/likelion/ssg/data.json";
+    private String dataFilepath = "/Users/chanki/Desktop/programming/likelion/ssg/data.json";
+    private String idFilepath = "/Users/chanki/Desktop/programming/likelion/ssg/id.json";
 
-    public File getFile() throws FileNotFoundException {
+    public File getFile() {
 
-        Scanner fileSc = new Scanner(new java.io.File(filepath));
+        Scanner idSc;
+        Scanner fileSc;
+
+        try {
+            idSc = new Scanner(new java.io.File(idFilepath));
+            fileSc = new Scanner(new java.io.File(dataFilepath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return new File(1, new ArrayList<>());
+        }
 
         if(fileSc.hasNext()) {
             String fileContent = fileSc.nextLine();
@@ -23,7 +35,7 @@ public class FileRepository {
 
             ArrayList<Saying> result = new ArrayList<>();
 
-            int id = parsePhraseId(fileContent);
+            int id = parsePhraseId(idSc.nextLine());
 
             for(String saying: sayings) {
                 if(saying.contains("}")) {
@@ -50,23 +62,28 @@ public class FileRepository {
     }
 
     int parsePhraseId(String parse) {
-        int start = parse.indexOf("phraseId=") + "phraseId=".length();
-        int end = parse.indexOf(',');
+        int start = parse.indexOf("id=") + "id=".length();
 
-        return Integer.parseInt(parse.substring(start, end));
+        return Integer.parseInt(parse.substring(start, parse.length() - 1));
     }
 
     public void saveFile(File file) {
-        PrintWriter pw = null;
+        PrintWriter idPw = null;
+        PrintWriter dataPw = null;
 
         try {
-            pw = new PrintWriter(filepath);
+            idPw = new PrintWriter(idFilepath);
+            dataPw = new PrintWriter(dataFilepath);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-        pw.println(file.toString());
-        pw.flush();
-        pw.close();
+        dataPw.println(new DataFile(file.getSayings()));
+        idPw.println(new IdFile(file.getId()));
+
+        dataPw.flush();
+        idPw.flush();
+        dataPw.close();
+        idPw.close();
     }
 }

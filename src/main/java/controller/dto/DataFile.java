@@ -2,24 +2,20 @@ package controller.dto;
 
 import java.util.ArrayList;
 
-public class File {
+public class DataFile {
 
-    private int id;
     private ArrayList<Saying> sayings;
 
-    public File(int id, ArrayList<Saying> sayings) {
-        this.id = id;
+    public DataFile(ArrayList<Saying> sayings) {
         this.sayings = sayings;
-    }
-    public File() {
-
-    }
-
-    public int getId() {
-        return id;
     }
 
     public ArrayList<Saying> getSayings() {
         return sayings;
+    }
+
+    @Override
+    public String toString() {
+        return sayings + "";
     }
 }
