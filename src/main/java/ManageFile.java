@@ -12,25 +12,29 @@ public class ManageFile {
 
         Scanner fileSc = new Scanner(new File(filepath));
 
-        FileDTO fileDTO = new FileDTO();
-
         if(fileSc.hasNext()) {
             String fileContent = fileSc.nextLine();
 
-            int id = parsePhraseId(fileContent);
-
-            String[] sayings = fileContent.substring(fileContent.indexOf('[') + 1, fileContent.indexOf(']')).split(", P");
+            String[] sayings = fileContent.substring(fileContent.indexOf('[') + 1, fileContent.indexOf(']')).split("}, ");
 
             ArrayList<Saying> result = new ArrayList<>();
 
+            int id = parsePhraseId(fileContent);
+
             for(String saying: sayings) {
-                String[] source = saying.substring(saying.indexOf('{') + 1, saying.indexOf('}')).split(", ");
-                result.add(parsePhrase(source));
+                if(saying.contains("}")) {
+                    String[] source = saying.substring(saying.indexOf('{') + 1, saying.indexOf('}')).split(", ");
+                    result.add(parsePhrase(source));
+                } else {
+                    String[] source = saying.substring(saying.indexOf('{') + 1).split(", ");
+                    result.add(parsePhrase(source));
+                }
+
             }
 
             return new FileDTO(id, result);
         } else {
-            return new FileDTO(0, new ArrayList<>());
+            return new FileDTO(1, new ArrayList<>());
         }
     }
 
@@ -58,7 +62,7 @@ public class ManageFile {
             e.printStackTrace();
         }
 
-        pw.println(file);
+        pw.println(file.toString());
         pw.flush();
         pw.close();
     }

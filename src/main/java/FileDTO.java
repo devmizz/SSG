@@ -9,13 +9,6 @@ public class FileDTO {
         this.id = id;
         this.sayings = sayings;
     }
-
-<<<<<<< HEAD
-    public int getId() {
-        return id;
-    }
-
-=======
     public FileDTO() {
 
     }
@@ -24,14 +17,13 @@ public class FileDTO {
         return id;
     }
 
->>>>>>> 6163a56 (for pull)
     public ArrayList<Saying> getSayings() {
         return sayings;
     }
 
     @Override
     public String toString() {
-        return "File{" +
+        return "{" +
                 "phraseId=" + id +
                 ", phrases=" + sayings +
                 '}';
