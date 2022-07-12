@@ -55,8 +55,8 @@ public class FileRepository {
 
     Saying parsePhrase(String[] source) {
         int phraseId = Integer.parseInt(source[0].substring(source[0].indexOf('=') + 1));
-        String writer = source[1].substring(source[1].indexOf('\'') + 1, source[1].length() - 1);
-        String phrase = source[2].substring(source[2].indexOf('\'') + 1, source[2].length() - 1);
+        String writer = source[1].substring(source[1].indexOf("=\"") + 2, source[1].length() - 1);
+        String phrase = source[2].substring(source[2].indexOf("=\"") + 2, source[2].length() - 1);
 
         return new Saying(phraseId, writer, phrase);
     }
