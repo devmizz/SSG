@@ -5,6 +5,9 @@ public class Saying {
     private String author;
     private String content;
 
+    public Saying() {
+    }
+
     public Saying(int id, String author, String content) {
         this.id = id;
         this.author = author;

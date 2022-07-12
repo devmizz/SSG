@@ -2,11 +2,11 @@ package controller.dto;
 
 import java.util.ArrayList;
 
-public class DataFile {
+public class Data {
 
     private ArrayList<Saying> sayings;
 
-    public DataFile(ArrayList<Saying> sayings) {
+    public Data(ArrayList<Saying> sayings) {
         this.sayings = sayings;
     }
 

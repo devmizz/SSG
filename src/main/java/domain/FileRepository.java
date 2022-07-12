@@ -1,8 +1,8 @@
 package domain;
 
-import controller.dto.DataFile;
-import controller.dto.File;
-import controller.dto.IdFile;
+import controller.dto.Data;
+import controller.dto.Sayings;
+import controller.dto.Id;
 import controller.dto.Saying;
 
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ public class FileRepository {
     private String dataFilepath = "/Users/chanki/Desktop/programming/likelion/ssg/data.json";
     private String idFilepath = "/Users/chanki/Desktop/programming/likelion/ssg/id.json";
 
-    public File getFile() {
+    public Sayings getFile() {
 
         Scanner idSc;
         Scanner fileSc;
@@ -25,7 +25,7 @@ public class FileRepository {
             fileSc = new Scanner(new java.io.File(dataFilepath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return new File(1, new ArrayList<>());
+            return new Sayings(1, new ArrayList<>());
         }
 
         if(fileSc.hasNext()) {
@@ -47,9 +47,9 @@ public class FileRepository {
                 }
             }
 
-            return new File(id, result);
+            return new Sayings(id, result);
         } else {
-            return new File(1, new ArrayList<>());
+            return new Sayings(1, new ArrayList<>());
         }
     }
 
@@ -62,12 +62,12 @@ public class FileRepository {
     }
 
     int parsePhraseId(String parse) {
-        int start = parse.indexOf("id=") + "id:".length();
+        int start = parse.indexOf("id:") + "id:".length();
 
         return Integer.parseInt(parse.substring(start, parse.length() - 1));
     }
 
-    public void saveFile(File file) {
+    public void save(Sayings sayings) {
         PrintWriter idPw = null;
         PrintWriter dataPw = null;
 
@@ -78,8 +78,8 @@ public class FileRepository {
             e.printStackTrace();
         }
 
-        dataPw.println(new DataFile(file.getSayings()));
-        idPw.println(new IdFile(file.getId()));
+        dataPw.println(new Data(sayings.getSayings()));
+        idPw.println(new Id(sayings.getId()));
 
         dataPw.flush();
         idPw.flush();

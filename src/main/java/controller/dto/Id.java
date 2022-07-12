@@ -1,10 +1,10 @@
 package controller.dto;
 
-public class IdFile {
+public class Id {
 
     private int id;
 
-    public IdFile(int id) {
+    public Id(int id) {
         this.id = id;
     }
 

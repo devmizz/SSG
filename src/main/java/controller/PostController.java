@@ -1,66 +1,41 @@
 package controller;
 
-import controller.dto.File;
+import controller.dto.Post;
 import controller.dto.Saying;
-import domain.FileRepository;
 import service.PostService;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Optional;
 
-public class AppController {
-    public void run(){
+public class PostController {
 
-        ArrayList<Saying> sayings;
-        String cmd;
-        int id;
+    PostService postService = new PostService();
 
-        System.out.println("== 명언 SSG ==");
+    public void initialize() {
+        postService.initialize();
+    }
 
-        Scanner sc = new Scanner(System.in);
+    public int add(Post post) {
+        return postService.add(post);
+    }
 
-        FileRepository fileRepository = new FileRepository();
+    public String show() {
+        return postService.show();
+    }
 
-        File file = fileRepository.getFile();
+    public boolean delete(int id) {
+        return postService.delete(id);
+    }
 
-        sayings = file.getSayings();
-        id = file.getId();
+    public Optional<Saying> find(int id) {
+        return postService.find(id);
+    }
 
-        PostService post = new PostService();
+    public void update(Saying saying) {
+        postService.update(saying);
+    }
 
-        outer:
-        while (true) {
-            System.out.print("명령) ");
-            cmd = sc.next().trim();
-
-            switch (cmd) {
-                case "종료":
-                    fileRepository.saveFile(new File(id, sayings));
-                    break outer;
-
-                case "빌드":
-                    fileRepository.saveFile(new File(id, sayings));
-                    break;
-
-                case "등록":
-                    sayings.add(post.add(id));
-                    id++;
-                    break;
-
-                case "목록":
-                    post.show(sayings);
-                    break;
-
-                case "삭제":
-                    sayings = post.delete(sayings);
-                    break;
-
-                case "수정":
-                    sayings = post.update(sayings);
-                    break;
-            }
-        }
-        sc.close();
+    public void save() {
+        postService.save();
     }
 }
 

@@ -2,12 +2,12 @@ package controller.dto;
 
 import java.util.ArrayList;
 
-public class File {
+public class Sayings {
 
     private int id;
     private ArrayList<Saying> sayings;
 
-    public File(int id, ArrayList<Saying> sayings) {
+    public Sayings(int id, ArrayList<Saying> sayings) {
         this.id = id;
         this.sayings = sayings;
     }

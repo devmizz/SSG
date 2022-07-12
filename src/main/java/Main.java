@@ -1,7 +1,7 @@
-import controller.AppController;
+import controller.PostController;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        new AppController().run();
+        new App().run();
     }
 }
