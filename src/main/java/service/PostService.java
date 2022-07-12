@@ -1,11 +1,15 @@
+package service;
+
+import controller.dto.Saying;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Post {
+public class PostService {
 
     Scanner sc = new Scanner(System.in);
 
-    Saying add(int id) {
+    public Saying add(int id) {
         String saying;
         String writer;
 
@@ -19,7 +23,7 @@ public class Post {
         return new Saying(id, writer, saying);
     }
 
-    void show(ArrayList<Saying> sayings) {
+    public void show(ArrayList<Saying> sayings) {
         if(sayings != null) {
             System.out.println("번호 / 작가 / 명언");
             System.out.println("---------------");
@@ -32,7 +36,7 @@ public class Post {
         }
     }
 
-    ArrayList<Saying> delete(ArrayList<Saying> sayings) {
+    public ArrayList<Saying> delete(ArrayList<Saying> sayings) {
         boolean isDeleted = false;
         System.out.print("id=");
         int delNumber = sc.nextInt();
@@ -49,7 +53,7 @@ public class Post {
         return sayings;
     }
 
-    ArrayList<Saying> update(ArrayList<Saying> sayings) {
+    public ArrayList<Saying> update(ArrayList<Saying> sayings) {
         Saying updatePrase = null;
         int updateId;
         int index = 0;

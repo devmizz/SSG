@@ -1,16 +1,20 @@
-import java.io.File;
+package domain;
+
+import controller.dto.File;
+import controller.dto.Saying;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ManageFile {
+public class FileRepository {
 
     private String filepath = "/Users/chanki/Desktop/programming/likelion/ssg/data.json";
 
-    FileDTO getFile() throws FileNotFoundException {
+    public File getFile() throws FileNotFoundException {
 
-        Scanner fileSc = new Scanner(new File(filepath));
+        Scanner fileSc = new Scanner(new java.io.File(filepath));
 
         if(fileSc.hasNext()) {
             String fileContent = fileSc.nextLine();
@@ -29,12 +33,11 @@ public class ManageFile {
                     String[] source = saying.substring(saying.indexOf('{') + 1).split(", ");
                     result.add(parsePhrase(source));
                 }
-
             }
 
-            return new FileDTO(id, result);
+            return new File(id, result);
         } else {
-            return new FileDTO(1, new ArrayList<>());
+            return new File(1, new ArrayList<>());
         }
     }
 
@@ -53,7 +56,7 @@ public class ManageFile {
         return Integer.parseInt(parse.substring(start, end));
     }
 
-    void saveFile(FileDTO file) {
+    public void saveFile(File file) {
         PrintWriter pw = null;
 
         try {

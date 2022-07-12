@@ -1,4 +1,6 @@
-class Saying {
+package controller.dto;
+
+public class Saying {
     private int id;
     private String author;
     private String content;
@@ -29,7 +31,7 @@ class Saying {
     public String toString() {
         return "{" +
                 "number=" + id +
-                ", writer='" + author + '\'' +
+                ", author='" + author + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

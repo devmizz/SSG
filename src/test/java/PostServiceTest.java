@@ -1,10 +1,9 @@
+import controller.dto.Saying;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class PostTest {
+class PostServiceTest {
 
     ArrayList<Saying> sayings = new ArrayList<>();
 

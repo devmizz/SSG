@@ -1,7 +1,14 @@
+package controller;
+
+import controller.dto.File;
+import controller.dto.Saying;
+import domain.FileRepository;
+import service.PostService;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class App {
+public class AppController {
     public void run() throws Exception {
 
         ArrayList<Saying> sayings;
@@ -12,14 +19,14 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
-        ManageFile manageFile = new ManageFile();
+        FileRepository fileRepository = new FileRepository();
 
-        FileDTO file = manageFile.getFile();
+        File file = fileRepository.getFile();
 
         sayings = file.getSayings();
         id = file.getId();
 
-        Post post = new Post();
+        PostService post = new PostService();
 
         outer:
         while (true) {
@@ -28,11 +35,11 @@ public class App {
 
             switch (cmd) {
                 case "종료":
-                    manageFile.saveFile(new FileDTO(id, sayings));
+                    fileRepository.saveFile(new File(id, sayings));
                     break outer;
 
                 case "빌드":
-                    manageFile.saveFile(new FileDTO(id, sayings));
+                    fileRepository.saveFile(new File(id, sayings));
                     break;
 
                 case "등록":
