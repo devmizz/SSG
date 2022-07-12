@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AppController {
-    public void run() throws Exception {
+    public void run(){
 
         ArrayList<Saying> sayings;
         String cmd;

@@ -11,9 +11,6 @@ public class File {
         this.id = id;
         this.sayings = sayings;
     }
-    public File() {
-
-    }
 
     public int getId() {
         return id;
