@@ -57,3 +57,4 @@ public class PostService {
         fileRepository.save(new Sayings(postRepository.getId(), postRepository.findAll()));
     }
 }
+

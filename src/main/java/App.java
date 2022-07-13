@@ -1,6 +1,6 @@
 import controller.PostController;
 import controller.dto.Post;
-import controller.dto.Saying;
+import util.Converter;
 
 import java.util.Scanner;
 
@@ -20,7 +20,8 @@ public class App {
         outer:
         while (true) {
             System.out.print("명령) ");
-            cmd = sc.next().trim();
+            Converter converter = new Converter(sc.nextLine().trim());
+            cmd = converter.getCmd();
 
             switch (cmd) {
                 case "종료":
@@ -49,14 +50,13 @@ public class App {
 
                 case "삭제":
                     System.out.print("id=");
-                    id = sc.nextInt();
+                    id = converter.getIdParam();
                     if(!postController.delete(id))
                         System.out.println(id + "번 명언은 존재하지 않습니다.");
                     break;
 
                 case "수정":
-                    System.out.print("id=");
-                    id = sc.nextInt();
+                    id = converter.getIdParam();
                     int tempId = id;
                     postController.find(id).ifPresentOrElse(
                             sayingObj -> {
